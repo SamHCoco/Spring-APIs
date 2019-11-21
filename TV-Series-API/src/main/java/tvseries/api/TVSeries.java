@@ -7,17 +7,13 @@ import javax.persistence.Id;
 public class TVSeries {
 
     @Id
-    private String id;
+    private int id;
     private String title;
     private int year;
     private String genre;
     private String description;
 
-    protected TVSeries(){
-
-    }
-
-    public TVSeries(String id, String title, int year, String genre, String description){
+    public TVSeries(int id, String title, int year, String genre, String description) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -25,8 +21,28 @@ public class TVSeries {
         this.description = description;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     //  GETTERS
-    public String getId() {
+    public int getId() {
         return id;
     }
 
