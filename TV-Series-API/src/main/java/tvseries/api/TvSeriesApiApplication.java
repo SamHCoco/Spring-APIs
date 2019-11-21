@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TvSeriesApiApplication {
+public class TVSeriesAPIApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TvSeriesApiApplication.class, args);
+		SpringApplication.run(TVSeriesAPIApplication.class, args);
 	}
-
 }
