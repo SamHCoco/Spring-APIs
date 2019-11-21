@@ -13,6 +13,10 @@ public class TVSeries {
     private String genre;
     private String description;
 
+    public TVSeries(){
+
+    }
+
     public TVSeries(int id, String title, int year, String genre, String description) {
         this.id = id;
         this.title = title;
@@ -21,6 +25,7 @@ public class TVSeries {
         this.description = description;
     }
 
+    // SETTERS
     public void setId(int id) {
         this.id = id;
     }
