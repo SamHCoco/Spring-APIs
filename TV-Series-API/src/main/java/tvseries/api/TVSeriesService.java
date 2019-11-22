@@ -17,4 +17,16 @@ public class TVSeriesService {
         tvSeriesRepository.findAll().forEach(tvSeries::add);
         return tvSeries;
     }
+
+    public TVSeries getTVSeries(int id){
+        if(tvSeriesRepository.findById(id).isPresent()){
+            return tvSeriesRepository.findById(id).get();
+        } else {
+            return null;
+        }
+    }
+
+    public void addTVSeries(TVSeries tvSeries){
+        tvSeriesRepository.save(tvSeries);
+    }
 }
