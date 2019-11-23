@@ -12,21 +12,40 @@ public class TVSeriesService {
     @Autowired
     private TVSeriesRepository tvSeriesRepository;
 
-    public List<TVSeries> getAllTVSeries(){
+    public List<TVSeries> getAllTVSeries(String genre, Integer year){
         List<TVSeries> tvSeries = new ArrayList<>();
-        tvSeriesRepository.findAll().forEach(tvSeries::add);
+        if(genre == null && year == null){
+            tvSeriesRepository.findAll().forEach(tvSeries::add);
+
+        } else if(year != null && genre != null){
+            tvSeriesRepository.findAllByYearAndGenre(year, genre).forEach(tvSeries::add);
+
+        } else if(year != null && genre == null){
+            tvSeriesRepository.findAllByYear(year).forEach(tvSeries::add);
+
+        } else if(year == null && genre != null){
+            tvSeriesRepository.findAllByGenre(genre).forEach(tvSeries::add);
+        }
         return tvSeries;
     }
 
     public TVSeries getTVSeries(int id){
         if(tvSeriesRepository.findById(id).isPresent()){
             return tvSeriesRepository.findById(id).get();
-        } else {
-            return null;
         }
+        return null;
     }
 
     public void addTVSeries(TVSeries tvSeries){
         tvSeriesRepository.save(tvSeries);
+    }
+
+    public boolean deleteTVSeries(int id){
+        boolean isDeleted = false;
+        if(tvSeriesRepository.findById(id).isPresent()){
+            tvSeriesRepository.deleteById(id);
+            isDeleted = true;
+        }
+        return isDeleted;
     }
 }
