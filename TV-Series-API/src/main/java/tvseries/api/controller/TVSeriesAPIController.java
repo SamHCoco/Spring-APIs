@@ -21,7 +21,7 @@ public class TVSeriesAPIController {
      * filtered by optional "genre" or release "year" query parameters.
      * @param genre The desired genre of TV series.
      * @param year The desired release year for TV series.
-     * @return ResponseEntity with HTTP status code 200 and response body containing queried
+     * @return HTTP status code 200 and response body containing queried
      * TV series if resource found, or HTTP code 404 response if not.
      */
     @GetMapping("/tv-series")
@@ -35,6 +35,13 @@ public class TVSeriesAPIController {
         }
     }
 
+    /**
+     * Handles GET request for single TV series resource, whose ID is specified by
+     * path variable provided.
+     * @param id The ID of the TV show resource
+     * @return JSON response containing requested TV show along with HTTP status
+     * code 200 if the TV series was found, or just an HTTP 404 if it was not.
+     */
     @GetMapping("/tv-series/{id}")
     public ResponseEntity<TVSeries> getTVSeries(@PathVariable int id){
         TVSeries tvShow = tvSeriesService.getTVSeries(id);
@@ -45,12 +52,27 @@ public class TVSeriesAPIController {
         }
     }
 
+    /**
+     * Handles PUT requests to add a single new TV series to the TV Series database.
+     * @param tvSeries The TV Series to be added defined in JSON format, specified by
+     * id, title, genre, description and year.
+     * @return HTTP status code 201 if TV show successfully added to database,
+     * or status code 400 otherwise.
+     */
     @PostMapping("/tv-series")
     public ResponseEntity addTVSeries(@RequestBody TVSeries tvSeries){
-        tvSeriesService.addTVSeries(tvSeries);
-        return new ResponseEntity(HttpStatus.OK);
+        if(tvSeriesService.addTVSeries(tvSeries)){
+            return new ResponseEntity(HttpStatus.CREATED);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Handles DELETE request for a single TV series in database.
+     * @param id The ID of the TV series to be deleted from database.
+     * @return HTTP status code 200 if the TV show was successfully deleted,
+     * status code 404 if the TV series could not be found in the database and deleted.
+     */
     @DeleteMapping("/tv-series/{id}")
     public ResponseEntity deleteTVSeries(@PathVariable int id){
         boolean isDeleteSuccessful;
