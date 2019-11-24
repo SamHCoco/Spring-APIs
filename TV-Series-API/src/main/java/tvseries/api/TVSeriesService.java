@@ -36,8 +36,13 @@ public class TVSeriesService {
         return null;
     }
 
-    public void addTVSeries(TVSeries tvSeries){
+    public boolean addTVSeries(TVSeries tvSeries){
+        boolean isAdded = false;
         tvSeriesRepository.save(tvSeries);
+        if(tvSeriesRepository.existsById(tvSeries.getId())){
+            isAdded = true;
+        }
+        return isAdded;
     }
 
     public boolean deleteTVSeries(int id){
