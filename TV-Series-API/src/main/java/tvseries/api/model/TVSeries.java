@@ -1,11 +1,9 @@
 package tvseries.api.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "tvseries")
 public class TVSeries {
 
     @Id
@@ -20,6 +18,7 @@ public class TVSeries {
 
     }
 
+    // constructor for unit testing
     public TVSeries(int id, String title, int year, String genre, String description) {
         this.id = id;
         this.title = title;
@@ -27,7 +26,6 @@ public class TVSeries {
         this.genre = genre;
         this.description = description;
     }
-
 
     // SETTERS
     public void setId(int id) {
@@ -50,7 +48,7 @@ public class TVSeries {
         this.description = description;
     }
 
-    //  GETTERS
+    // GETTERS
     public int getId() {
         return id;
     }
