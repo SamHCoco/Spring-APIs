@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import tvseries.api.TVSeries;
-import tvseries.api.TVSeriesService;
+import tvseries.api.model.TVSeries;
+import tvseries.api.service.TVSeriesService;
 
 import java.util.List;
 
@@ -65,6 +65,7 @@ public class TVSeriesAPIController {
             return new ResponseEntity(HttpStatus.CREATED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
     }
 
     /**
