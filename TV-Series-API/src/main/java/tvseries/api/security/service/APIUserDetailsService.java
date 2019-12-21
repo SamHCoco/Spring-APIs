@@ -17,12 +17,17 @@ public class APIUserDetailsService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Checks whether the user passed as an argument exists in the database and returns
+     * the UserDetails object containing the user's details (username, password etc).
+     * @param userName The user name of the API user.
+     * @return The user's details: username, password, roles and authorities.
+     * @throws UsernameNotFoundException Throws exception if the user could not be found in database.
+     */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUserName(userName);
-        // test whether user found, throw exception if not
         user.orElseThrow(() -> new UsernameNotFoundException("ERROR: USER " + userName + " NOT FOUND"));
-        // return 'UserDetails' object with found user
         return user.map(APIUserDetails::new).get();
     }
 }
