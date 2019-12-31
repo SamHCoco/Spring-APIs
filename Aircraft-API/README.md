@@ -26,7 +26,9 @@ GET http://localhost:8080/api/aircrafts/{id}
 To return all aircrafts in the database which operate in the specified sector, make a HTTP GET request to the following endpoint:
 ```
 GET http://localhost:8080/api/aircrafts/{sector}
-For example, to get all military aircrafts in the database, we use the following endpoint:
+
+For example, to get all military aircrafts in the database,
+a GET request is sent the following endpoint:
 http://localhost:8080/api/aircrafts/military
 ```
 
@@ -34,7 +36,11 @@ http://localhost:8080/api/aircrafts/military
 To add aircrafts to the database, make a HTTP POST request to the following endpoint:
 ```
 POST http://localhost:8080/api/aircrafts
-For example, to add two aircrafts send the request with the request body containing a JSON array (if JSON is being used) of 2 aircraft objects with the following key-values pairs:
+
+For example, to add two aircrafts send the request with the request body
+containing a JSON array (if JSON is being used) of 2 aircraft objects
+with the following key-values pairs:
+
 [
   {
     "make": "value",
