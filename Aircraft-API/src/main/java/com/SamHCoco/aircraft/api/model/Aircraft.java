@@ -114,5 +114,34 @@ public class Aircraft {
                (sector.equals(aircraft.getSector()));
     }
 
-
+    /**
+     * Updates the fields of the object with those of another aircraft object,
+     * whenever the field value for this object differs from that of the aircraft
+     * passed as an argument.
+     * @param aircraft The aircraft whose differing field values we wish to
+     * pass to the object.
+     */
+    public void updateFields(Aircraft aircraft){
+        if(aircraft.getMaximumAltitude() != null){
+            this.maximumAltitude = aircraft.getMaximumAltitude();
+        }
+        if(aircraft.getFuelCapacity() != null){
+            this.fuelCapacity = aircraft.getFuelCapacity();
+        }
+        if(aircraft.getMake() != null){
+            this.make = aircraft.getMake();
+        }
+        if(aircraft.getModel() != null){
+            this.model = aircraft.getModel();
+        }
+        if(aircraft.getSector() != null){
+            this.sector = aircraft.getSector();
+        }
+        if(aircraft.getMaximumRange() != null){
+            this.maximumRange = aircraft.getMaximumRange();
+        }
+        if(aircraft.getMaximumSpeed() != null){
+            this.maximumSpeed = aircraft.getMaximumSpeed();
+        }
+    }
 }
