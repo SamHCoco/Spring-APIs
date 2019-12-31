@@ -2,7 +2,7 @@
 
 ## Overview (Updated as new features are added):
 
-A RESTful API for interacting with a database of the following types of commercial, military and private aircraft, allowing the client to consume JSON data on their following specs:
+A RESTful API for interacting with a database of aircrafts, allowing the client to consume JSON data on their following specs:
 - *Make*
 - *Model*
 - *Maximum altitude - ft*
