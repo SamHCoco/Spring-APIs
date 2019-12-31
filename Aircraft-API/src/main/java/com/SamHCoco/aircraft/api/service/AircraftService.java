@@ -67,13 +67,15 @@ public class AircraftService {
     /**
      * Updates a single aircraft in the database.
      * @param id The ID of the aircraft to be updated.
-     * @param aircraft The aircraft containing updated values.
+     * @param newAircraft The aircraft containing updated values.
      * @return True if the update was successful, false otherwise.
      */
-    public boolean updateAircraft(int id, Aircraft aircraft){
+    public boolean updateAircraft(int id, Aircraft newAircraft){
         if(aircraftRepository.findById(id).isPresent()){
-            aircraft.setId(id);
+            Aircraft aircraft = aircraftRepository.findById(id).get();
+            aircraft.updateFields(newAircraft);
             aircraftRepository.save(aircraft);
+            // tests if update was successful
             if(aircraftRepository.findById(id).get().equals(aircraft)){
                 return true;
             } else{
