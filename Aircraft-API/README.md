@@ -29,6 +29,7 @@ GET http://localhost:8080/api/aircrafts/{sector}
 
 For example, to get all military aircrafts in the database,
 a GET request is sent the following endpoint:
+
 http://localhost:8080/api/aircrafts/military
 ```
 
@@ -75,6 +76,7 @@ PUT http://localhost:8080/api/aircraft/{id}
 Where {id} is the ID of the aircraft to be updated.
 For example, to update the make, range, and speed properties of aircraft
 with ID equal 2 in the database, a PUT request is sent to:
+
 http://localhost:8080/api/aircrafts/2
 
 With the request body containing the key-value specification of the fields
