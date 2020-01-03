@@ -1,12 +1,14 @@
 package com.SamHCoco.aircraft.api.controller;
 
 import com.SamHCoco.aircraft.api.model.Aircraft;
+import com.SamHCoco.aircraft.api.model.Aircrafts;
 import com.SamHCoco.aircraft.api.service.AircraftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +26,9 @@ public class AircraftAPIController {
      * @return All aircrafts in database, and HTTP status 200.
      */
     @GetMapping("")
-    public ResponseEntity<List<Aircraft>> getAllAircrafts(){
-        List<Aircraft> allAircrafts = aircraftService.getAllAircrafts();
-        return new ResponseEntity<>(allAircrafts, HttpStatus.OK);
+    public ResponseEntity<Aircrafts> getAllAircrafts(){
+        Aircrafts aircrafts = new Aircrafts(aircraftService.getAllAircrafts());
+        return new ResponseEntity<>(aircrafts, HttpStatus.OK);
     }
 
     /**
@@ -38,10 +40,11 @@ public class AircraftAPIController {
      * or HTTP status 404 if none could be found.
      */
     @GetMapping("/{sector}")
-    public ResponseEntity<List<Aircraft>> getAllAircraftsBySector(@PathVariable String sector){
-        Optional<List<Aircraft>> aircrafts = aircraftService.getAllAircraftBySector(sector);
-        if(aircrafts.isPresent()){
-            return new ResponseEntity<>(aircrafts.get(), HttpStatus.OK);
+    public ResponseEntity<Aircrafts> getAllAircraftsBySector(@PathVariable String sector){
+        Optional<List<Aircraft>> optional = aircraftService.getAllAircraftBySector(sector);
+        if(optional.isPresent()){
+            Aircrafts aircrafts = new Aircrafts(optional.get());
+            return new ResponseEntity<>(aircrafts, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -72,7 +75,7 @@ public class AircraftAPIController {
      * HTTP status 404 if the aircraft to update could not be found in the database.
      */
     @PutMapping("/{id}")
-    public ResponseEntity updateAircraft(@PathVariable int id, @RequestBody Aircraft aircraft){
+    public ResponseEntity updateAircraft(@PathVariable int id, @RequestBody @NotEmpty Aircraft aircraft){
         boolean updated = aircraftService.updateAircraft(id, aircraft);
         if(updated){
             return new ResponseEntity(HttpStatus.OK);
