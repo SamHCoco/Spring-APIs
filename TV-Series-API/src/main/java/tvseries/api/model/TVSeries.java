@@ -68,4 +68,23 @@ public class TVSeries {
     public String getDescription() {
         return description;
     }
+
+    /**
+     * Updates the fields of the object with the field values of another TVSeries object.
+     * @param tvSeries The TVSeries object whose field values will update the object's field values.
+     */
+    public void updateFields(TVSeries tvSeries){
+        if(tvSeries.getTitle() != null && !tvSeries.getTitle().isEmpty()){
+            title = tvSeries.getTitle();
+        }
+        if(tvSeries.getGenre() != null && !tvSeries.getGenre().isEmpty()){
+            genre = tvSeries.getGenre();
+        }
+        if(tvSeries.getDescription() != null && !tvSeries.getDescription().isEmpty()){
+            description = tvSeries.getDescription();
+        }
+        if(tvSeries.getYear() != 0){
+            year = tvSeries.getYear();
+        }
+    }
 }
