@@ -24,7 +24,7 @@ public class TVSeriesAPIController {
      * @return HTTP status code 200 and response body containing queried
      * TV series if resource found, or HTTP code 404 response if not.
      */
-    @GetMapping("/tv-series")
+    @GetMapping("api/tv-series")
     public ResponseEntity<List<TVSeries>> getAllTVSeries(@RequestParam(required = false) String genre,
                                                          @RequestParam(required = false) Integer year){
         List<TVSeries> tvSeries = tvSeriesService.getAllTVSeries(genre, year);
@@ -42,7 +42,7 @@ public class TVSeriesAPIController {
      * @return JSON response containing requested TV show along with HTTP status
      * code 200 if the TV series was found, or just an HTTP 404 if it was not.
      */
-    @GetMapping("/tv-series/{id}")
+    @GetMapping("api/tv-series/{id}")
     public ResponseEntity<TVSeries> getTVSeries(@PathVariable int id){
         TVSeries tvShow = tvSeriesService.getTVSeries(id);
         if(tvShow != null){
@@ -59,13 +59,29 @@ public class TVSeriesAPIController {
      * @return HTTP status code 201 if TV show successfully added to database,
      * or status code 400 otherwise.
      */
-    @PostMapping("/tv-series")
+    @PostMapping("api/tv-series")
     public ResponseEntity addTVSeries(@RequestBody TVSeries tvSeries){
-        if(tvSeriesService.addTVSeries(tvSeries)){
+        boolean created = tvSeriesService.addTVSeries(tvSeries);
+        if(created){
             return new ResponseEntity(HttpStatus.CREATED);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
+    }
+
+    /**
+     * Handles a PUT request to update a single new TV series in the database.
+     * @param id The ID of the TV Series in the database to be updated.
+     * @param tvSeries The TVSeries object containing the update values.
+     * @return HTTP status 200 if the TV Series was successfully updated, or
+     * HTTP status 404 if the TV series was not found.
+     */
+    public ResponseEntity updateTVSeries(@PathVariable int id, @RequestBody TVSeries tvSeries){
+        boolean updated = tvSeriesService.updateTVSeries(id, tvSeries);
+        if(updated){
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -74,11 +90,10 @@ public class TVSeriesAPIController {
      * @return HTTP status code 200 if the TV show was successfully deleted,
      * status code 404 if the TV series could not be found in the database and deleted.
      */
-    @DeleteMapping("/tv-series/{id}")
+    @DeleteMapping("api/tv-series/{id}")
     public ResponseEntity deleteTVSeries(@PathVariable int id){
-        boolean isDeleteSuccessful;
-        isDeleteSuccessful = tvSeriesService.deleteTVSeries(id);
-        if(isDeleteSuccessful){
+        boolean deleted = tvSeriesService.deleteTVSeries(id);
+        if(deleted){
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
