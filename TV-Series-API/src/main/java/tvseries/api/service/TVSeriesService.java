@@ -52,6 +52,21 @@ public class TVSeriesService {
     }
 
     /**
+     * Updates the fields of a single TV Series in the database.
+     * @param id The ID of the TV Series in the database to be updated.
+     * @param newTVSeries The TVSeries object containing the update values.
+     * @return True if the TV Series was successfully updated, false if it wasn't found in the database.
+     */
+    public boolean updateTVSeries(int id, TVSeries newTVSeries){
+        if(tvSeriesRepository.findById(id).isPresent()){
+            TVSeries tvSeries = tvSeriesRepository.findById(id).get();
+            tvSeries.updateFields(newTVSeries);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Service to add a single TV series to the database.
      * @param tvSeries The TV series to be added to the database.
      * @return True if the TV series as successfully added, or false otherwise.
